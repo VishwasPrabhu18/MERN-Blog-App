@@ -76,7 +76,7 @@ const SignUp = () => {
             </div>
             <div className="">
               <Label value="Your password" />
-              <TextInput onChange={handleChange} type="password" placeholder="Password" id="password" />
+              <TextInput onChange={handleChange} type="password" placeholder="**********" id="password" />
             </div>
 
             <Button gradientDuoTone="purpleToPink" type="submit" disabled={loading}>
