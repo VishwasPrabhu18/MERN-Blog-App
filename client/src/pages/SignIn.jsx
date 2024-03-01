@@ -1,15 +1,17 @@
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
-import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
+import { signInstart, signInSuccess, signInFailure } from "../redux/user/userSlice";
 
 const SignIn = () => {
 
+  const {loading, errorMessage} = useSelector((state) => state.user);
+
   const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
@@ -19,13 +21,12 @@ const SignIn = () => {
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
-      setErrorMessage("All fields are required");
-      return;
+      return dispatch(signInFailure("All fields are required"));
+      
     }
 
     try {
-      setLoading(true);
-      setErrorMessage(null);
+      dispatch(signInstart());
       const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
@@ -38,16 +39,15 @@ const SignIn = () => {
       const data = await res.json();
 
       if (data.success === false) {
-        setErrorMessage("User already exists...!");
-        return;
+        return dispatch(signInFailure("Invalid credentials...!"));
       }
-      setLoading(false);
+      
       if (res.ok) {
+        dispatch(signInSuccess(data));
         navigate("/");
       }
     } catch (error) {
-      setErrorMessage("Something went wrong...!");
-      setLoading(false);
+      return dispatch(signInFailure("Something went wrong...!"));
     }
   };
 
