@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { About, Dashboard, Home, Projects, SignIn, SignUp } from './pages'
-import Header from './components/Header'
+import { FooterComp, Header } from './components/index.js'
+
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
       </Routes>
+      <FooterComp />
     </Router>
   )
 }
