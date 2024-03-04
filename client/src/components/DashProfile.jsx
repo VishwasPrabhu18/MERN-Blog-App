@@ -6,7 +6,6 @@ import { firebaseApp } from '../firebase.js';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { updateFailure, updateStart, updateSuccess } from '../redux/user/userSlice.js';
-import { set } from 'mongoose';
 
 const DashProfile = () => {
 
