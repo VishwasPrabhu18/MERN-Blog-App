@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 body {
-    color: black;
-    font-weight: 400;
+    height: 100vh;
+}
+
+.ql-editor {
+    font-size: 1rem;
 }
