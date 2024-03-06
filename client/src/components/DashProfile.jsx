@@ -7,10 +7,11 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { updateFailure, updateStart, updateSuccess, deleteUserStart, deleteUserSuccess, deleteUserFailure } from '../redux/user/userSlice.js';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { Link } from "react-router-dom";
 
 const DashProfile = () => {
 
-  const { currentUser, error } = useSelector((state) => state.user);
+  const { currentUser, error, loading } = useSelector((state) => state.user);
 
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl, setImageFileUrl] = useState(null);
@@ -89,7 +90,7 @@ const DashProfile = () => {
       setUpdateUserError("Please wait for image to upload before submitting form");
       return;
     }
-    
+
     try {
       dispatch(updateStart());
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
@@ -115,7 +116,7 @@ const DashProfile = () => {
     }
   };
 
-  const handleDeleteUser = async () => { 
+  const handleDeleteUser = async () => {
     setShowModel(false);
     try {
       dispatch(deleteUserStart());
@@ -136,7 +137,7 @@ const DashProfile = () => {
     }
   };
 
-  const handleSignOut = async () => { 
+  const handleSignOut = async () => {
     try {
       const res = await fetch(`/api/user/signout`, {
         method: 'POST',
@@ -188,7 +189,17 @@ const DashProfile = () => {
         <TextInput onChange={handleInputChange} type='email' id='email' placeholder='Email' defaultValue={currentUser.email} />
         <TextInput onChange={handleInputChange} type='password' id='password' placeholder='Enter new Password' />
 
-        <Button type='submit' className='w-full' gradientDuoTone="purpleToBlue" outline>Update</Button>
+        <Button type='submit' className='w-full' gradientDuoTone="purpleToBlue" outline disabled={loading || imageFileUploading}>
+          {loading ? 'Loading...' : 'Update'}
+        </Button>
+
+        {
+          currentUser.isAdmin && (
+            <Link to="create-post">
+              <Button type='button' gradientDuoTone="purpleToPink" className='w-full'>Create a Post</Button>
+            </Link>
+          )
+        }
       </form>
 
       <div className="text-red-500 flex justify-between mt-5">

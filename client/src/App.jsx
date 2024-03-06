@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { About, Dashboard, Home, Projects, SignIn, SignUp } from './pages'
-import { FooterComp, Header, PrivateRoute } from './components/index.js'
+import { About, CreatePost, Dashboard, Home, Projects, SignIn, SignUp } from './pages'
+import { AdminPrivateRoute, FooterComp, Header, PrivateRoute } from './components/index.js'
 
 
 const App = () => {
@@ -11,6 +11,9 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+        <Route element={<AdminPrivateRoute />}>
+          <Route path='/create-post' element={<CreatePost />} />
         </Route>
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
