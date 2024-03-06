@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { HiUser, HiArrowSmRight } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
 import { deleteUserSuccess } from "../redux/user/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const DashSidebar = () => {
+
+  const { currentUser } = useSelector((state) => state.user);
 
   const location = useLocation();
   const dispatch = useDispatch();
@@ -42,7 +44,7 @@ const DashSidebar = () => {
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Link to="/dashboard?tab=profile">
-            <Sidebar.Item active={tab === "profile"} icon={HiUser} label={"User"} labelColor="dark" as="div">Profile</Sidebar.Item>
+            <Sidebar.Item active={tab === "profile"} icon={HiUser} label={currentUser.isAdmin ? "Admin" : "User"} labelColor="dark" as="div">Profile</Sidebar.Item>
           </Link>
           <Sidebar.Item icon={HiArrowSmRight} className="cursor-pointer" onClick={handleSignOut}>Sign Out</Sidebar.Item>
         </Sidebar.ItemGroup>
