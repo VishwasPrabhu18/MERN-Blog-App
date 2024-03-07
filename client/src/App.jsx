@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { About, CreatePost, Dashboard, Home, Projects, SignIn, SignUp } from './pages'
+import { About, CreatePost, Dashboard, Home, Projects, SignIn, SignUp, UpdatePost } from './pages'
 import { AdminPrivateRoute, FooterComp, Header, PrivateRoute } from './components/index.js'
 
 
@@ -14,6 +14,7 @@ const App = () => {
         </Route>
         <Route element={<AdminPrivateRoute />}>
           <Route path='/create-post' element={<CreatePost />} />
+          <Route path='/update-post/:postId' element={<UpdatePost />} />
         </Route>
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
