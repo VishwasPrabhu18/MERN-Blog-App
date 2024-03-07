@@ -56,7 +56,23 @@ const DashUsers = () => {
   };
 
   const handleDeleteUser = async () => {
+    try {
+      const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
+        method: "DELETE",
+      });
 
+      const data = await res.json();
+
+      if (res.ok) {
+        setUsers(users.filter((user) => user._id !== userIdToDelete));
+        setShowModal(false);
+      } else {
+        console.log(data.message);
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -115,7 +131,7 @@ const DashUsers = () => {
             <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>Are you sure want to delete this User ?</h3>
             <div className="flex justify-center gap-4">
               <Button color="failure" onClick={handleDeleteUser}>Yes, I&apos;m sure</Button>
-              <Button color='gray' onClick={() => setShowModal(false)}>No</Button>
+              <Button color='gray' onClick={() => setShowModal(false)}>No, Cancel</Button>
             </div>
           </div>
         </Modal.Body>
