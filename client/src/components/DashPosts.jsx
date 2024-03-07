@@ -2,12 +2,14 @@ import { Table } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { MdExpandMore } from 'react-icons/md';
 
 const DashPosts = () => {
 
   const { currentUser } = useSelector((state) => state.user);
 
   const [userPosts, setUserPosts] = useState([]);
+  const [showMore, setShowMore] = useState(true);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -17,6 +19,9 @@ const DashPosts = () => {
 
         if (res.ok) {
           setUserPosts(data.posts);
+          if (data.posts.length < 9) {
+            setShowMore(false);
+          }
         }
       } catch (error) {
         console.error(error);
@@ -28,7 +33,25 @@ const DashPosts = () => {
     }
   }, [currentUser._id]);
 
-  console.log(userPosts);
+  const handleShowMore = async () => { 
+    const startIndex = userPosts.length;
+
+    try {
+      const res = await fetch(`/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`);
+      const data = await res.json();
+
+      if (res.ok) {
+        setUserPosts((prev) => [...prev, ...data.posts]);
+        if (data.posts.length < 9) {
+          setShowMore(false);
+        }
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   return (
     <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       {currentUser.isAdmin && userPosts.length > 0 ? (
@@ -71,6 +94,14 @@ const DashPosts = () => {
               ))
             }
           </Table>
+          {
+            showMore && (
+              // <div className="flex gap-3 h-8 w-full py-8 justify-center items-center">
+                <button className="h-8 w-full flex justify-center text-teal-500 text-sm py-8 gap-3 items-center" onClick={handleShowMore}>Show More <MdExpandMore/></button>
+                
+              // </div>
+            )
+          }
         </>
       ) : (
         <p>You Hanve no posts yet</p>
