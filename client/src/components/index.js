@@ -6,3 +6,4 @@ export { default as PrivateRoute } from './PrivateRoute';
 export { default as AdminPrivateRoute } from './AdminPrivateRoute';
 export { default as DashSidebar } from './DashSidebar';
 export { default as DashProfile } from './DashProfile';
+export { default as DashPosts } from './DashPosts';
