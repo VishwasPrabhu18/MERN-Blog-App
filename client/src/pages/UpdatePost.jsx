@@ -7,10 +7,12 @@ import { firebaseApp } from "../firebase.js";
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector} from "react-redux"
 
 const UpdateePost = () => {
 
   const navigate = useNavigate();
+  const { currentUser } = useSelector((state) => state.user);
 
   const [file, setFile] = useState([]);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
@@ -85,8 +87,8 @@ const UpdateePost = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/post/create", {
-        method: "POST",
+      const res = await fetch(`/api/post/updatepost/${formData._id}/${currentUser._id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -123,7 +125,7 @@ const UpdateePost = () => {
           </Select>
         </div>
         <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3">
-          <FileInput typeof="file" accept="image/*" onChange={(e) => setFile(e.target.files[0])} required />
+          <FileInput typeof="file" accept="image/*" onChange={(e) => setFile(e.target.files[0])} />
           <Button type="button" gradientDuoTone="purpleToBlue" size="sm" outline onClick={handleUploadImage} disabled={imageUploadProgress}>
             {
               imageUploadProgress ? (
