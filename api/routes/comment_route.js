@@ -5,3 +5,5 @@ import { verifyToken } from '../utils/verifyUser.js';
 const commentRouter = express.Router();
 
 commentRouter.get('/create', verifyToken, createComment);
+
+export default commentRouter;

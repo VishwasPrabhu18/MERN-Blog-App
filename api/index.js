@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import userRouter from "./routes/user_route.js";
 import authRouter from "./routes/auth_route.js";
 import postRouter from "./routes/post_route.js";
+import commentRouter from "./routes/comment_route.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -27,6 +28,8 @@ app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 
 app.use("/api/post", postRouter);
+
+app.use("/api/comment", commentRouter);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;

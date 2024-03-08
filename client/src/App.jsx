@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { About, CreatePost, Dashboard, Home, PostPage, Projects, SignIn, SignUp, UpdatePost } from './pages'
-import { AdminPrivateRoute, FooterComp, Header, PrivateRoute } from './components/index.js'
+import { AdminPrivateRoute, FooterComp, Header, PrivateRoute, ScrollToTop } from './components/index.js'
 
 
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
