@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { About, CreatePost, Dashboard, Home, Projects, SignIn, SignUp, UpdatePost } from './pages'
+import { About, CreatePost, Dashboard, Home, PostPage, Projects, SignIn, SignUp, UpdatePost } from './pages'
 import { AdminPrivateRoute, FooterComp, Header, PrivateRoute } from './components/index.js'
 
 
@@ -20,6 +20,7 @@ const App = () => {
         <Route path="/projects" element={<Projects />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/post/:postSlug" element={<PostPage />} />
       </Routes>
       <FooterComp />
     </Router>
