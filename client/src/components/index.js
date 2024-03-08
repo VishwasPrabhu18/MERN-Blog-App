@@ -10,4 +10,5 @@ export { default as DashPosts } from './DashPosts';
 export { default as DashUsers } from './DashUsers';
 export { default as CallToAction } from './CallToAction';
 export { default as CommentSection } from './CommentSection';
+export { default as Comment } from './Comment';
 export { default as ScrollToTop } from './ScrollToTop';

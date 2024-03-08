@@ -10,6 +10,6 @@ userRouter.put("/update/:userId", verifyToken, updateUser);
 userRouter.delete("/delete/:userId", verifyToken, deleteUser);
 userRouter.post("/signout", signOut);
 userRouter.get("/getusers", verifyToken, getUsers);
-userRouter.get(":userId", getUser);
+userRouter.get("/:userId", getUser);
 
 export default userRouter;
