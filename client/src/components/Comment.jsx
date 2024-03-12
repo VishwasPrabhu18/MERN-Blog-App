@@ -4,7 +4,7 @@ import { FaThumbsUp } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Button, Textarea } from "flowbite-react"
 
-const Comment = ({ comment, onLike, onEdit }) => {
+const Comment = ({ comment, onLike, onEdit, onDelete }) => {
 
   const { currentUser } = useSelector((state) => state.user);
 
@@ -33,7 +33,7 @@ const Comment = ({ comment, onLike, onEdit }) => {
     setEditedContent(comment.content);
   }
 
-  const handleSave = async () => { 
+  const handleSave = async () => {
     try {
       const res = await fetch(`/api/comment/editComment/${comment._id}`, {
         method: "PUT",
@@ -67,10 +67,10 @@ const Comment = ({ comment, onLike, onEdit }) => {
         {
           isEditing ? (
             <>
-            <Textarea
-              className="mb-2"
-              value={editedContent}
-              onChange={(e) => setEditedContent(e.target.value)}
+              <Textarea
+                className="mb-2"
+                value={editedContent}
+                onChange={(e) => setEditedContent(e.target.value)}
               />
               <div className="flex justify-end gap-2 text-sm">
                 <Button type="button" size="sm" gradientDuoTone="purpleToBlue" onClick={handleSave}>Save</Button>
@@ -89,9 +89,14 @@ const Comment = ({ comment, onLike, onEdit }) => {
                 </p>
                 {
                   currentUser && (currentUser._id === comment.userId || currentUser.isAdmin) && (
-                    <button type="button" onClick={handleEdit} className="text-gray-400 hover:text-blue-500">
-                      Edit
-                    </button>
+                    <>
+                      <button type="button" onClick={handleEdit} className="text-gray-400 hover:text-blue-500">
+                        Edit
+                      </button>
+                      <button type="button" onClick={() => onDelete(comment._id)} className="text-gray-400 hover:text-red-500">
+                        Delete
+                      </button>
+                    </>
                   )
                 }
               </div>
