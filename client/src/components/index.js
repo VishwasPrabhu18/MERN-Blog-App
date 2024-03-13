@@ -8,6 +8,7 @@ export { default as DashSidebar } from './DashSidebar';
 export { default as DashProfile } from './DashProfile';
 export { default as DashPosts } from './DashPosts';
 export { default as DashUsers } from './DashUsers';
+export { default as DashComments } from './DashComments';
 export { default as CallToAction } from './CallToAction';
 export { default as CommentSection } from './CommentSection';
 export { default as Comment } from './Comment';
