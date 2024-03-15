@@ -7,7 +7,7 @@ import { firebaseApp } from "../firebase.js";
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector} from "react-redux"
+import { useSelector } from "react-redux"
 
 const UpdateePost = () => {
 

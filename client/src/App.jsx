@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { About, CreatePost, Dashboard, Home, PostPage, Projects, SignIn, SignUp, UpdatePost } from './pages'
+import { About, CreatePost, Dashboard, Home, PostPage, Projects, Search, SignIn, SignUp, UpdatePost } from './pages'
 import { AdminPrivateRoute, FooterComp, Header, PrivateRoute, ScrollToTop } from './components/index.js'
 
 
@@ -21,6 +21,7 @@ const App = () => {
         <Route path="/projects" element={<Projects />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/post/:postSlug" element={<PostPage />} />
       </Routes>
       <FooterComp />
